@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alerta de sistema</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: #100707;
+  color: #ff4545;
+  font-family: Consolas, monospace;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.panel {
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid #b91c1c;
+  padding: 28px;
+  background: #180909;
+  box-shadow: 0 0 30px #70000055;
+}
+
+h1 {
+  text-align: center;
+  font-size: clamp(23px, 6vw, 34px);
+  animation: pulse 1s infinite alternate;
+}
+
+@keyframes pulse {
+  from { opacity: 1; }
+  to { opacity: .55; }
+}
+
+.bar {
+  height: 9px;
+  background: #391010;
+  margin: 20px 0;
+  overflow: hidden;
+}
+
+.progress {
+  height: 100%;
+  width: 0;
+  background: #ff2525;
+  transition: width .3s;
+}
+
+.line {
+  margin: 14px 0;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+button {
+  display: block;
+  margin: 24px auto 0;
+  padding: 14px 24px;
+  background: #a30000;
+  color: white;
+  border: 1px solid #ff5555;
+  font: bold 16px Consolas, monospace;
+  cursor: pointer;
+}
+
+button:hover { background: #d00000; }
+
+#reveal { display: none; text-align: center; }
+
+#reveal h2 {
+  color: #ff5555;
+  font-size: 30px;
+}
+
+.heart { font-size: 45px; }
+.small { color: #d4aaaa; font-size: 12px; }
+</style>
+</head>
+
+<body>
+<main class="panel">
+  <section id="intro">
+    <h1>⚠ ALERTA DE SISTEMA ⚠</h1>
+    <p class="line">Iniciando simulación cinematográfica...</p>
+    <div class="bar"><div class="progress" id="progress"></div></div>
+    <div id="logs" aria-live="polite"></div>
+    <p class="small">
+      DEMOSTRACIÓN FICTICIA · NO SE ACCEDE A DATOS
+    </p>
+    <button id="start">INICIAR SIMULACIÓN</button>
+  </section>
+
+  <section id="reveal">
+    <div class="heart">❤️😂</div>
+    <h2>¡CAÍSTE, MI AMOR!</h2>
+    <p>JAJAJA, ¡ERA UNA BROMA! 😂</p>
+    <p>Ahora estamos a mano, mi amor ❤️</p>
+    <p class="small">Todo era una simulación. Tus archivos están intactos.</p>
+  </section>
+</main>
+
+<script>
+const start = document.getElementById("start");
+const logs = document.getElementById("logs");
+const progress = document.getElementById("progress");
+
+const messages = [
+  "[SIMULACIÓN] Preparando secuencia...",
+  "[SIMULACIÓN] Analizando efectos visuales...",
+  "[SIMULACIÓN] Ejecutando alerta cinematográfica...",
+  "[SIMULACIÓN] Todo listo..."
+];
+
+start.addEventListener("click", () => {
+  start.disabled = true;
+  start.textContent = "EJECUTANDO...";
+  let i = 0;
+
+  function next() {
+    if (i < messages.length) {
+      const line = document.createElement("p");
+      line.className = "line";
+      line.textContent = messages[i];
+      logs.appendChild(line);
+      i++;
+      progress.style.width = (i / messages.length * 100) + "%";
+      setTimeout(next, 1300);
+    } else {
+      setTimeout(() => {
+        document.getElementById("intro").style.display = "none";
+        document.getElementById("reveal").style.display = "block";
+      }, 2200);
+    }
+  }
+
+  next();
+});
+</script>
+</body>
+</html>
