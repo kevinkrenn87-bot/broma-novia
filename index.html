@@ -1,147 +1,93 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Alerta de sistema</title>
-
+<title>Verificación de cuenta</title>
 <style>
-* { box-sizing: border-box; }
-
-body {
-  margin: 0;
-  min-height: 100vh;
-  background: #100707;
-  color: #ff4545;
-  font-family: Consolas, monospace;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-}
-
-.panel {
-  width: 100%;
-  max-width: 600px;
-  border: 1px solid #b91c1c;
-  padding: 28px;
-  background: #180909;
-  box-shadow: 0 0 30px #70000055;
-}
-
-h1 {
-  text-align: center;
-  font-size: clamp(23px, 6vw, 34px);
-  animation: pulse 1s infinite alternate;
-}
-
-@keyframes pulse {
-  from { opacity: 1; }
-  to { opacity: .55; }
-}
-
-.bar {
-  height: 9px;
-  background: #391010;
-  margin: 20px 0;
-  overflow: hidden;
-}
-
-.progress {
-  height: 100%;
-  width: 0;
-  background: #ff2525;
-  transition: width .3s;
-}
-
-.line {
-  margin: 14px 0;
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-button {
-  display: block;
-  margin: 24px auto 0;
-  padding: 14px 24px;
-  background: #a30000;
-  color: white;
-  border: 1px solid #ff5555;
-  font: bold 16px Consolas, monospace;
-  cursor: pointer;
-}
-
-button:hover { background: #d00000; }
-
-#reveal { display: none; text-align: center; }
-
-#reveal h2 {
-  color: #ff5555;
-  font-size: 30px;
-}
-
-.heart { font-size: 45px; }
-.small { color: #d4aaaa; font-size: 12px; }
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,sans-serif}
+.screen{min-height:100vh;display:flex;align-items:center;
+justify-content:center;padding:22px}
+.card{width:100%;max-width:390px;border:1px solid #dadce0;
+border-radius:26px;padding:32px 25px;text-align:center}
+.logo{font-size:36px;font-weight:bold;letter-spacing:-2px}
+.logo span:nth-child(1){color:#4285f4}
+.logo span:nth-child(2){color:#ea4335}
+.logo span:nth-child(3){color:#fbbc05}
+.logo span:nth-child(4){color:#4285f4}
+.logo span:nth-child(5){color:#34a853}
+.logo span:nth-child(6){color:#ea4335}
+h1{font-size:25px;font-weight:400;margin:25px 0 12px}
+p{color:#5f6368;line-height:1.5}
+input{width:100%;padding:15px;margin:10px 0;
+border:1px solid #dadce0;border-radius:5px;font-size:16px}
+button{border:0;border-radius:7px;padding:13px 23px;
+background:#1a73e8;color:white;font-size:15px;
+font-weight:bold;cursor:pointer;margin-top:18px}
+.note{font-size:11px;color:#777;margin-top:22px}
+#alert{display:none;background:#100000;color:#ff333d;
+text-align:center;min-height:100vh;padding:30px 20px}
+#alert h1{font-size:30px;font-weight:bold;color:#ff333d}
+.warning{font-size:65px;margin-top:35px}
+#reveal{display:none;color:white;text-align:center;
+min-height:100vh;padding:30px 20px;
+align-items:center;justify-content:center;flex-direction:column}
+#reveal h1{font-size:38px;font-weight:bold}
 </style>
 </head>
-
 <body>
-<main class="panel">
-  <section id="intro">
-    <h1>⚠ ALERTA DE SISTEMA ⚠</h1>
-    <p class="line">Iniciando simulación cinematográfica...</p>
-    <div class="bar"><div class="progress" id="progress"></div></div>
-    <div id="logs" aria-live="polite"></div>
-    <p class="small">
-      DEMOSTRACIÓN FICTICIA · NO SE ACCEDE A DATOS
-    </p>
-    <button id="start">INICIAR SIMULACIÓN</button>
-  </section>
+<section class="screen" id="login">
+ <div class="card">
+  <div class="logo"><span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span></div>
+  <h1>Iniciar sesión</h1>
+  <p>Continuá para acceder a tu cuenta</p>
+  <form id="prankForm">
+   <input type="email" placeholder="Correo electrónico" required>
+   <input type="password" placeholder="Contraseña ficticia" required>
+   <p class="note">SIMULACIÓN DE BROMA. No ingreses contraseñas reales.</p>
+   <button type="submit">Acceder</button>
+  </form>
+ </div>
+</section>
 
-  <section id="reveal">
-    <div class="heart">❤️😂</div>
-    <h2>¡CAÍSTE, MI AMOR!</h2>
-    <p>JAJAJA, ¡ERA UNA BROMA! 😂</p>
-    <p>Ahora estamos a mano, mi amor ❤️</p>
-    <p class="small">Todo era una simulación. Tus archivos están intactos.</p>
-  </section>
-</main>
+<section id="alert">
+ <div class="warning">⚠️</div>
+ <h1>¡ALERTA DE SEGURIDAD!</h1>
+ <h2>¡ESTÁS SIENDO HACKEADA!</h2>
+ <p style="color:#ffb5b5">Se detectó una actividad sospechosa...</p>
+ <h2>Reinicia tu teléfono rápido 😱</h2>
+ <p style="color:#ffaaaa">Analizando sistema...</p>
+ <p id="count">Revelando resultado en 5 segundos...</p>
+</section>
+
+<section id="reveal">
+ <div style="font-size:75px">😂❤️</div>
+ <h1>¡ES BROMA!</h1>
+ <h2>¡TE AGARRÉ! 😂</h2>
+ <p style="color:white">No te hackeé nada, tranquila.</p>
+ <p style="color:white">Era una bromita ❤️</p>
+ <button onclick="location.reload()">Volver a empezar</button>
+</section>
 
 <script>
-const start = document.getElementById("start");
-const logs = document.getElementById("logs");
-const progress = document.getElementById("progress");
-
-const messages = [
-  "[SIMULACIÓN] Preparando secuencia...",
-  "[SIMULACIÓN] Analizando efectos visuales...",
-  "[SIMULACIÓN] Ejecutando alerta cinematográfica...",
-  "[SIMULACIÓN] Todo listo..."
-];
-
-start.addEventListener("click", () => {
-  start.disabled = true;
-  start.textContent = "EJECUTANDO...";
-  let i = 0;
-
-  function next() {
-    if (i < messages.length) {
-      const line = document.createElement("p");
-      line.className = "line";
-      line.textContent = messages[i];
-      logs.appendChild(line);
-      i++;
-      progress.style.width = (i / messages.length * 100) + "%";
-      setTimeout(next, 1300);
-    } else {
-      setTimeout(() => {
-        document.getElementById("intro").style.display = "none";
-        document.getElementById("reveal").style.display = "block";
-      }, 2200);
-    }
+document.getElementById('prankForm').addEventListener('submit',function(e){
+ e.preventDefault();
+ document.getElementById('login').style.display='none';
+ document.getElementById('alert').style.display='block';
+ let seconds=5;
+ const timer=setInterval(function(){
+  seconds--;
+  document.getElementById('count').textContent=
+   seconds>0?'Revelando resultado en '+seconds+' segundos...':'¡Sorpresa!';
+  if(seconds<=0){
+   clearInterval(timer);
+   document.getElementById('alert').style.display='none';
+   document.getElementById('reveal').style.display='flex';
+   document.getElementById('reveal').style.background='#18000b';
   }
-
-  next();
+ },1000);
 });
 </script>
 </body>
